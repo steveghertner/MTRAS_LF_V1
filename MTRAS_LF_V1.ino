@@ -7,7 +7,11 @@ for MTRAS kit.  The motor routine was replaced to drive two
 continuous rotation servo motors.  The speeds are modified to
 go from 0-100 (negative is in reverse).  The PID calculations are
 modified to scale them appropriately for 0-100 speed range and
-the Kp and Kd have been tuned for these motors.
+the Kp and Kd have been tuned for these motors. 
+
+NOTE:  The MTRAS kit runs best on advanced course with
+    scoop off! The scoop drags on the ground and slows the robots
+    ability to pivot quick enough on turns.
 
 Pin outs are as follows:
 IR Sensor  ->  Nano Pin
@@ -42,6 +46,7 @@ the new version.  You may need to quit arduino IDE and then restart it to load t
 
 
 Changelog:
+02/26/2022: lowered speed from 0.85 of max to 0.75
 02/20/2022:  QTRSensors library didn't work anymore.  I am using V4.0 of QTRSensors now
             I suspect we were using an older version. Modified syntax for the newer version
             of the library
@@ -51,6 +56,11 @@ Changelog:
     will work on a longer straight section.
     also seemed to work using (1.2,0.2) at 0.85 of max speed
     look at determining straight section and setting to full speed
+
+TO DO:
+  - trouble with tight turns on advanced course.  runs best on advanced course with
+    scoop off.  Try adjusting PID and speed without scoop or with 3D print "caster" that
+    lifts scoop off the ground
 
 */
 
@@ -114,7 +124,8 @@ const int RT_MOTOR_CALIB=1;
 const int LT_MOTOR_CALIB=0;
 const boolean RT_INVERT=false;
 const boolean LT_INVERT=true;
-const float LINE_FOLLOW_SPD_RED = 0.85; //slow the line follow speed
+const float LINE_FOLLOW_SPD_RED = 0.75; //slow the line follow speed, 0.75 for basic course
+//const float LINE_FOLLOW_SPD_RED = 1.0;  // for advanced course with tight turns
 
 //global variables for motor
 int rtMotorSpeed=180;
